@@ -1,14 +1,14 @@
 import random
 import string
-
+#test
 def start():
     try:
-        with open("KEY.txt", "r") as f:
+        with open("EncryptionKey.txt", "r") as f:
             key = f.read()
     except FileNotFoundError:
-        with open("KEY.txt", "w") as f:
-            f.write(''.join([random.choice(string.ascii_letters) for n in range(256)]))
-        with open("KEY.txt", "r") as f:
+        with open("EncryptionKey.txt", "w") as f:
+            f.write(''.join([random.choice(string.ascii_letters + string.digits + string.punctuation) for n in range(256)]))
+        with open("EncryptionKey.txt", "r") as f:
             key = f.read()
     return key
 
@@ -61,10 +61,8 @@ def decode(key):
 
     print(solved)
 
-
 def main():
     encKey :str = ""
-
     encKey = start()
     choose(encKey)
 
