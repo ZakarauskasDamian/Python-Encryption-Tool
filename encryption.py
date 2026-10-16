@@ -1,6 +1,7 @@
+#! /usr/bin/env python3
 import random
 import string
-#test
+
 def start():
     try:
         with open("EncryptionKey.txt", "r") as f:
@@ -18,12 +19,16 @@ def choose(key):
 Choose what action to preform:
 1. Encode message
 2. Decode message
+3. Generate new key
+4. End Program
 """)
         if enter == "1":
             encode(key)
-            break
-        elif enter =="2": 
+        elif enter == "2": 
             decode(key)
+        elif enter == "3":
+            key = generate()
+        elif enter == "4":
             break
         else:
             print("Invalid option")
@@ -60,6 +65,14 @@ def decode(key):
         solved += chr(solv_cur + ord("!"))
 
     print(solved)
+
+def generate():
+    with open("EncryptionKey.txt", "w") as f:
+        f.write(''.join([random.choice(string.ascii_letters + string.digits + string.punctuation) for n in range(256)]))
+    with open("EncryptionKey.txt", "r") as f:
+        key = f.read()
+    print("New key generated")
+    return key
 
 def main():
     encKey :str = ""
